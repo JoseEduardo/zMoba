@@ -22,6 +22,8 @@ namespace CompleteProject
         void Awake () 
         {
             anim = GetComponent<Animator> ();
+			anim.SetBool("OnGround", true);
+			anim.SetBool("Crouch", false);
             navMeshAgent = GetComponent<NavMeshAgent> ();
         }
         
@@ -58,7 +60,17 @@ namespace CompleteProject
                 walking = true;
             }
 
-            anim.SetBool ("IsWalking", walking);
+			//anim.SetFloat("Forward", 15f, 0.1f, Time.deltaTime);
+			//anim.SetFloat("Turn", 0.1f, 0.1f, Time.deltaTime);
+			//anim.SetBool("Crouch", false);
+
+			if (walking) {
+				anim.SetFloat ("Forward", 0.1f, 0f, Time.deltaTime);
+			} else {
+				anim.SetFloat ("Forward", 0f, 0f, Time.deltaTime);
+			}
+
+			anim.SetBool ("IsWalking", walking);
         }
 
         private void MoveAndShoot()
